@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-// MASUKKAN API KEY GEMINI KAMU YANG BARU DI SINI
-const GEMINI_API_KEY = "AIzaSyC_nS_RPRBomLfE-RWAdP4KunYjd87DjHc"; 
+// MASUKKAN API KEY GEMINI KAMU YANG BARU DI SINI (Atau ambil dari settings.js)
+const GEMINI_API_KEY = global.geminiApiKey || ""; 
 
 module.exports = {
     name: 'gemini',
