@@ -1,0 +1,39 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Bot Session & Local Databases
+hydromd/
+database/
+auth_info_baileys/
+*.db
+*.sqlite
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Temp & Scratch files
+scratch_dir/
+*.scratch.*
+
+# Credentials & API Keys (JANGAN PERNAH PUSH FILE INI KE GITHUB)
+settings.js
+client_secret_*.json
+credentials.json
+token.json
+
+# Dataset (Uncomment jika CSV tidak ingin dipush ke github)
+# traffic_log.csv
