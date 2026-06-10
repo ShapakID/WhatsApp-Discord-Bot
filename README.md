@@ -10,10 +10,20 @@ Fokus utama dari bot ini adalah untuk memenuhi Tugas Akhir pada mata kuliah **St
 Algoritma Support Vector Regression (SVR) di dalam sistem ini dibangun dan diterapkan untuk memprediksi jumlah interaksi pesan atau kepadatan trafik server pada waktu mendatang. Implementasi logika matematika regresi ini dilakukan langsung di dalam JavaScript (dan/atau bahasa opsional Python), menunjukkan secara riil bagaimana konsep statistika dan probabilitas diterapkan untuk menyelesaikan masalah prediksi sistem.
 
 ## ✨ Fitur Utama Bot
-1. **Analisis Prediksi Statistika (SVR)**: Menghitung dan memproyeksikan kepadatan trafik bot berdasarkan rekam jejak dataset.
-2. **Sistem Logger Real-time Otomatis**: Secara instan mencatat timestamp (waktu, tanggal, jam), ID pengguna, serta tipe obrolan (grup/pribadi) ke dalam file `traffic_log.csv`.
-3. **Multi-Device Support**: Berjalan secara mulus di dua platform raksasa: WhatsApp (menggunakan protokol Baileys) dan Discord (menggunakan discord.js).
-4. **Fitur Utilitas Ekstra**: Memiliki dukungan perintah pemutar musik, peringatan keamanan (CVE), konverter PDF, sistem donasi via Pakasir, serta sistem pengingat (reminder) jadwal kuliah.
+Proyek ini mencakup dua platform dengan fungsionalitas yang sangat kaya, terbagi menjadi dua sistem perintah:
+
+**📱 WhatsApp Features (`Command_WhatsApp`)**
+- **Prediksi (SVR)**: Sistem analisis deret waktu (time-series) dan peramalan trafik.
+- **AI Integration**: Terintegrasi penuh dengan Google Gemini AI untuk interaksi cerdas.
+- **Downloader & Tools**: Pengunduh media, konverter PDF, dan utilitas pendukung lainnya.
+- **Group & Admin**: Manajemen grup WhatsApp (Kick, Ban, Promosi, dll).
+- **Menu & Owner**: Pengaturan core bot dan antarmuka menu dinamis.
+
+**🎮 Discord Features (`Command_Discord`)**
+- **Prediksi (SVR)**: Fungsionalitas statistik yang sama untuk menganalisis trafik server Discord.
+- **Music Player**: Pemutar musik berkinerja tinggi menggunakan sistem node Lavalink / Shoukaku.
+- **Moderation & Security**: Perintah moderasi server (Ban, Kick, Lock) dan sistem peringatan keamanan global (CVE).
+- **General & Owner**: Perintah umum (Ping, Help, Donate) dan kontrol utama bot.
 
 ---
 
@@ -29,14 +39,23 @@ Sebelum memasang bot ini, pastikan PC atau VPS (Server) kamu sudah memenuhi kual
 ### 2. Kloning Repositori
 Buka terminal atau command prompt kamu, lalu jalankan perintah ini:
 ```bash
-git clone https://github.com/UsernameKamu/NamaRepoKamu.git
-cd NamaRepoKamu
+git clone https://github.com/ShapakID/WhatsApp-Discord-Bot.git
+cd WhatsApp-Discord-Bot
 ```
 
 ### 3. Instalasi Modul Dependencies
-Unduh semua pustaka (*library*) yang dibutuhkan Node.js untuk menjalankan proyek ini:
+Unduh semua pustaka yang dibutuhkan dengan sekali salin dan tempel di terminal kamu.
+
+**Untuk Modul Node.js (Bot Utama):**
+Karena seluruh daftar modul sudah disiapkan di dalam `package.json`, kamu cukup mengetik satu perintah ini untuk menginstal puluhan *library* (seperti `discord.js`, `@google/generative-ai`, `pdfkit`, dll) secara otomatis:
 ```bash
 npm install
+```
+
+**Untuk Modul Python (Backend Prediksi SVR):**
+Jika kamu menggunakan fitur `.prediksi` dan `.prediksidoc`, pastikan Python sudah terpasang, lalu jalankan instalasi *library* Data Science berikut:
+```bash
+pip install pandas scikit-learn matplotlib numpy
 ```
 
 ### 4. Konfigurasi Kredensial (`settings.js`)
