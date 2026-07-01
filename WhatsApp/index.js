@@ -306,6 +306,9 @@ async function hydroInd() {
             if (kay.key.id.startsWith('903D') && kay.key.id.length === 14) return
 
             const m = kay
+            if (global.autoread && m.key && !m.key.fromMe) {
+                hydro.readMessages([m.key]).catch(() => {});
+            }
             require('./hydro')(hydro, m, chatUpdate, store)
         } catch (err) {
             console.log(err)
