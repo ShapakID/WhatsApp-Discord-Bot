@@ -143,7 +143,7 @@ async function hydroInd() {
             creds: state.creds,
             keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
         },
-        browser: baileys.Browsers.mataram('Desktop'),
+        browser: ["Mac OS", "Safari", "10.15.7"],
         cachedGroupMetadata: async (jid) => {
             if (!jid.endsWith('@g.us')) return
             let gm = store.groupMetadata?.[jid]
