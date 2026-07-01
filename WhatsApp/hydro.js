@@ -327,7 +327,7 @@ module.exports = hydro = async (hydro, m, chatUpdate, store) => {
 
         const pushname = m.pushName
         const botNumber = await hydro.decodeJid(hydro.user.id)
-        const Ahmad = [...(global.owner || []), global.ownernomer, global.botnumber]
+        const Ahmad = [...(global.owner || []), ...(global.ownerNumber || []), global.ownernomer, global.botnumber]
             .map(v => {
                 if (!v) return '';
                 if (v.includes('@lid')) return v;
