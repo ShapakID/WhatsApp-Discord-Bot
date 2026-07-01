@@ -5,7 +5,7 @@ module.exports = {
     name: 'yt',
     execute: async (hydro, m, args, text, { prefix }) => {
         if (!args[0]) return hydro.sendMessage(m.chat, { text: `Kirim link YouTube-nya!\nContoh: *${prefix}yt [link]*` }, { quoted: m });
-        
+
         let fallbackText = `Pilih format untuk video YouTube ini:\n\n`;
         fallbackText += `╭───『 *AUDIO* 』───\n`;
         fallbackText += `│ • Format: MP3\n`;

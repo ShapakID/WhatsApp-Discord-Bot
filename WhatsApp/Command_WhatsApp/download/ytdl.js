@@ -11,7 +11,7 @@ module.exports = {
         hydro.sendMessage(m.chat, { text: `_Sedang memproses ${type.toUpperCase()} via Ryzendesu API..._` });
 
         try {
-            let apiUrl = type === 'mp3' 
+            let apiUrl = type === 'mp3'
                 ? `https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(url)}`
                 : `https://api.ryzendesu.vip/api/downloader/ytmp4?url=${encodeURIComponent(url)}`;
 

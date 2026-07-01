@@ -21,6 +21,12 @@ module.exports = {
 
             let result = res.data.data;
             let videoUrl = result.play || result.wmplay;
+            
+            // TikWM API sometimes returns relative URLs like /video/media/play/...
+            if (videoUrl && !videoUrl.startsWith('http')) {
+                videoUrl = 'https://www.tikwm.com' + videoUrl;
+            }
+
             let title = result.title || 'TikTok Video';
             let cap = `  *Judul:* ${title}\n\n_Downloaded by ${global.botname}_`;
 
