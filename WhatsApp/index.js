@@ -1,6 +1,6 @@
-require('../settings');
-const { loadCommands } = require('../lib/handler');
-const { modul } = require('../lib/module');
+require('./settings');
+const { loadCommands } = require('./lib/handler');
+const { modul } = require('./lib/module');
 const moment = require('moment-timezone');
 const { baileys, boom, chalk, fs, figlet, FileType, path, pino, process, PhoneNumber, axios, yargs, _ } = modul;
 const { Boom } = boom
@@ -36,7 +36,7 @@ const colors = require('colors')
 
 let phoneNumber = "6285187063723"
 
-const { downloadAllAssets, fsm, stricted } = require('../lib/file.js');
+const { downloadAllAssets, fsm, stricted } = require('./lib/file.js');
 downloadAllAssets().catch(console.error);
 
 if (fs.existsSync('./database/database.json')) {
@@ -230,7 +230,7 @@ async function hydroInd() {
             if (update.connection == "open") {
                 console.log(`✅ HydroBot Connected!`)
 
-                const { startSewaChecker, startAutoSholat } = require('../lib/function');
+                const { startSewaChecker, startAutoSholat } = require('./lib/function');
                 if (typeof startSewaChecker === 'function') startSewaChecker(hydro);
                 if (typeof startAutoSholat === 'function') startAutoSholat(hydro);
                 stricted(hydro);
@@ -310,11 +310,11 @@ async function hydroInd() {
     })
 
     hydro.ev.on('group-participants.update', async (anu) => {
-        require('../lib/group').participantsUpdate(hydro, anu);
+        require('./lib/group').participantsUpdate(hydro, anu);
     });
 
     hydro.ev.on('groups.update', async (anu) => {
-        require('../lib/group').groupsUpdate(hydro, anu, store);
+        require('./lib/group').groupsUpdate(hydro, anu, store);
     });
 
 
