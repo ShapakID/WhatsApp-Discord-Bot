@@ -1,7 +1,5 @@
 const fs = require('fs');
 // Pastikan fungsi ini sudah di-export di lib/drive.js ya!
-const { getDriveClient, getOrCreateFolder } = require('../../lib/drive'); 
-
 module.exports = {
     name: 'setupsemester',
     execute: async (hydro, m, args, text, { isAdminBot, prefix }) => {
@@ -13,6 +11,7 @@ module.exports = {
         hydro.sendMessage(m.chat, { text: `  Mengecek & Sinkronisasi folder Semester ${semester} di Google Drive...\nSabar ya, proses ini ngecek folder satu-satu biar nggak duplikat.` }, { quoted: m });
         
         try {
+            const { getDriveClient, getOrCreateFolder } = require('../../lib/drive');
             const drive = await getDriveClient();
             if (!drive) throw new Error("Google Drive API tidak siap (cek token/credentials).");
             const semFolder = await getOrCreateFolder(drive, `Semester ${semester}`, global.driveFolderId);

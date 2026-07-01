@@ -1,4 +1,3 @@
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 // MASUKKAN API KEY GEMINI KAMU YANG BARU DI SINI (Atau ambil dari settings.js)
 const GEMINI_API_KEY = global.geminiApiKey || ""; 
@@ -23,6 +22,7 @@ module.exports = {
             // Kirim pesan tunggu
             await hydro.sendMessage(m.chat, { text: global.mess?.wait || "*_Tunggu sebentar ya kak ^~^*" }, { quoted: m });
 
+            const { GoogleGenerativeAI } = require("@google/generative-ai");
             const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
             // ==========================================
