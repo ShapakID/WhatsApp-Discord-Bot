@@ -1,4 +1,4 @@
-let GoogleGenAI; try { GoogleGenAI = require('@google/genai').GoogleGenAI; } catch(e) { GoogleGenAI = class {}; }
+let GoogleGenAI; try { GoogleGenAI = require('@google/genai').GoogleGenAI; } catch (e) { GoogleGenAI = class { }; }
 const { createClient } = require('@supabase/supabase-js');
 const WebSocket = require('ws');
 

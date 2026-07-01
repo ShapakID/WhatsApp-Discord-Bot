@@ -190,7 +190,7 @@ const {
 } = require('./lib/scrape/youtube.js');
 const {
     spotifyScrape
-} = require('./lib/scrape/spotify.js");
+} = require('./lib/scrape/spotify.js');
 const {
     hdvideo,
     hdr
