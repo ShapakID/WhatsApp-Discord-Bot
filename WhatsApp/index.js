@@ -307,7 +307,17 @@ async function hydroInd() {
 
             const m = kay
             if (global.autoread && m.key && !m.key.fromMe) {
-                await hydro.readMessages([m.key]);
+                setTimeout(async () => {
+                    try {
+                        await hydro.readMessages([{
+                            remoteJid: m.key.remoteJid,
+                            id: m.key.id,
+                            participant: m.key.participant
+                        }]);
+                    } catch (e) {
+                        console.error("AutoRead Error:", e);
+                    }
+                }, 500);
             }
             require('./hydro')(hydro, m, chatUpdate, store)
         } catch (err) {
