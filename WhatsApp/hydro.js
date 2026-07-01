@@ -4,14 +4,14 @@
 • JANGAN DI JUAL
 */
 
-require('./settings');
-require('./lib/listmenu');
+require('../settings');
+require('../lib/listmenu');
 
 // ====== REQUIRE AREA & LIB START ======
 
 const {
     modul
-} = require('./lib/module');
+} = require('../lib/module');
 const {
     runtime,
     formatp,
@@ -26,7 +26,7 @@ const {
     groupStatus,
     getRandom,
     getBuffer
-} = require('./lib/function');
+} = require('../lib/function');
 const {
     initDatabase,
     getLimitCost,
@@ -36,7 +36,7 @@ const {
     cmdUnregister,
     cmdProfile,
     cmdSetDaftarMode
-} = require('./lib/database');
+} = require('../lib/database');
 const {
     makeBrat,
     makeBratVid,
@@ -46,13 +46,13 @@ const {
     BALogo,
     makeStoryIG,
     makeIQC
-} = require('./lib/maker');
+} = require('../lib/maker');
 const {
     searchDaerah
-} = require('./lib/jadwalsholat');
+} = require('../lib/jadwalsholat');
 const {
     antilinkDetector
-} = require('./lib/protect');
+} = require('../lib/protect');
 const {
     gameCasinoSolo,
     gameTebakLagu,
@@ -89,10 +89,10 @@ const {
     checkTebakTebakan,
     gameChess,
     checkChess
-} = require('./lib/games');
+} = require('../lib/games');
 const {
     gameDaily
-} = require('./lib/rpg')
+} = require('../lib/rpg')
 const {
     antibot,
     antibotSettings,
@@ -100,7 +100,7 @@ const {
     saveAntibotSettings,
     handleAntibot,
     commandAntibot
-} = require('./lib/antibot');
+} = require('../lib/antibot');
 const {
     loadReseller,
     saveReseller,
@@ -117,10 +117,10 @@ const {
     execCadmin,
     checkCooldown,
     setCooldown
-} = require('./lib/cpanel')
+} = require('../lib/cpanel')
 const {
     askGemini
-} = require('./lib/aistudio');
+} = require('../lib/aistudio');
 
 // ====== LIB END & CONST START ======
 
@@ -156,48 +156,48 @@ const {
 
 // ====== MODULE END & SCRAPE START ======
 
-const RemoveBG = require('./lib/scrape/removebg.js');
+const RemoveBG = require('../lib/scrape/removebg.js');
 
 const {
     tiktokDl
-} = require('./lib/scrape/tiktok.js')
+} = require('../lib/scrape/tiktok.js')
 const {
     igdl
-} = require('./lib/scrape/instagram.js');
+} = require('../lib/scrape/instagram.js');
 const {
     mathgpt
-} = require('./lib/scrape/mathgpt.js');
+} = require('../lib/scrape/mathgpt.js');
 const {
     FeloClient
-} = require('./lib/scrape/feloai.js');
+} = require('../lib/scrape/feloai.js');
 const {
     chatex
-} = require('./lib/scrape/chatexai.js');
+} = require('../lib/scrape/chatexai.js');
 const ReactChannel
-    = require('./lib/scrape/reactch.js');
+    = require('../lib/scrape/reactch.js');
 const {
     searchPinterestAPI
-} = require('./lib/scrape/pin-search.js')
+} = require('../lib/scrape/pin-search.js')
 const {
     searchDafont
-} = require('./lib/scrape/dafont.js')
+} = require('../lib/scrape/dafont.js')
 const {
     searchSpotify
-} = require('./lib/scrape/naze.js');
+} = require('../lib/scrape/naze.js');
 const {
     ytmp3,
     ytmp4
-} = require('./lib/scrape/youtube.js');
+} = require('../lib/scrape/youtube.js');
 const {
     spotifyScrape
-} = require("./lib/scrape/spotify.js");
+} = require('../lib/scrape/spotify.js");
 const {
     hdvideo,
     hdr
-} = require('./lib/scrape/hd.js');
+} = require('../lib/scrape/hd.js');
 const {
     capcutDownload
-} = require('./lib/scrape/capcut.js');
+} = require('../lib/scrape/capcut.js');
 
 // ====== SCRAPE END & REQUIRE AREA ======
 
@@ -253,7 +253,7 @@ module.exports = hydro = async (hydro, m, chatUpdate, store) => {
 
         // ----------------------------------------------------
 
-        const msgHelper = require('./lib/src/message')(hydro, m, chatUpdate, store);
+        const msgHelper = require('../lib/src/message')(hydro, m, chatUpdate, store);
         m = msgHelper.m;
         const { reply, replytolak, replyquery, replysuccess, replyfail, replywait, appenTextMessage, react, replylimit, replywarn } = msgHelper;
         const rawContext = m.message?.[m.mtype]?.contextInfo;
