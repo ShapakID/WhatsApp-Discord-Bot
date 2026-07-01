@@ -156,48 +156,22 @@ const {
 
 // ====== MODULE END & SCRAPE START ======
 
-const RemoveBG = require('./lib/scrape/removebg.js');
-
-const {
-    tiktokDl
-} = require('./lib/scrape/tiktok.js')
-const {
-    igdl
-} = require('./lib/scrape/instagram.js');
-const {
-    mathgpt
-} = require('./lib/scrape/mathgpt.js');
-const {
-    FeloClient
-} = require('./lib/scrape/feloai.js');
-const {
-    chatex
-} = require('./lib/scrape/chatexai.js');
-const ReactChannel
-    = require('./lib/scrape/reactch.js');
-const {
-    searchPinterestAPI
-} = require('./lib/scrape/pin-search.js')
-const {
-    searchDafont
-} = require('./lib/scrape/dafont.js')
-const {
-    searchSpotify
-} = require('./lib/scrape/naze.js');
-const {
-    ytmp3,
-    ytmp4
-} = require('./lib/scrape/youtube.js');
-const {
-    spotifyScrape
-} = require('./lib/scrape/spotify.js');
-const {
-    hdvideo,
-    hdr
-} = require('./lib/scrape/hd.js');
-const {
-    capcutDownload
-} = require('./lib/scrape/capcut.js');
+const RemoveBG = () => {};
+const tiktokDl = () => {};
+const igdl = () => {};
+const mathgpt = () => {};
+const FeloClient = class {};
+const chatex = () => {};
+const ReactChannel = () => {};
+const searchPinterestAPI = () => {};
+const searchDafont = () => {};
+const searchSpotify = () => {};
+const ytmp3 = () => {};
+const ytmp4 = () => {};
+const spotifyScrape = () => {};
+const hdvideo = () => {};
+const hdr = () => {};
+const capcutDownload = () => {};
 
 // ====== SCRAPE END & REQUIRE AREA ======
 
