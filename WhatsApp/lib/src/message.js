@@ -1,4 +1,4 @@
-const { generateWAMessage, areJidsSameUser, proto } = require('@mataram/wa')
+const { generateWAMessage, areJidsSameUser, proto } = require('socketon')
 const fs = require('fs');
 const axios = require('axios');
 const FileType = require('file-type');
@@ -6,7 +6,7 @@ const { writeExif } = require('../exif');
 const { getBuffer, axiosss } = require('../function');
 
 module.exports = (hydro, m, chatUpdate, store) => {
-    
+
     const reply = async (teks) => {
         return await hydro.sendMessage(m.chat, { text: teks }, { quoted: m });
     }
@@ -188,7 +188,7 @@ module.exports = (hydro, m, chatUpdate, store) => {
         messages.key.id = m.key.id;
         messages.pushName = m.pushName;
         if (m.isGroup) messages.participant = m.sender;
-        
+
         let msg = {
             ...chatUpdate,
             messages: [proto.WebMessageInfo.fromObject(messages)],
@@ -202,7 +202,7 @@ module.exports = (hydro, m, chatUpdate, store) => {
     }
 
     hydro.sendPoll = async (jid, name = '', values = [], quoted, selectableCount = 1) => {
-        return await hydro.sendMessage(jid, { poll: { name, values, selectableCount }}, { quoted: quoted || m });
+        return await hydro.sendMessage(jid, { poll: { name, values, selectableCount } }, { quoted: quoted || m });
     }
 
     hydro.sendFileUrl = async (jid, url, caption, quoted, options = {}) => {
@@ -222,7 +222,7 @@ module.exports = (hydro, m, chatUpdate, store) => {
                 return hydro.sendMessage(jid, { audio: res.data, mimetype: 'audio/mpeg', ...options }, quotedOptions);
             }
         }
-        
+
         const res = await axiosss.get(url, { responseType: 'arraybuffer' });
         let mime = res.headers['content-type'];
         if (!mime || mime.includes('octet-stream')) {
@@ -239,13 +239,13 @@ module.exports = (hydro, m, chatUpdate, store) => {
     }
 
     m.react = react;
-    
+
     m.reply = async (content, options = {}) => {
         const quoted = options.quoted || m;
         const chat = options.chat || m.chat;
         const caption = options.caption || '';
-        const ephemeralExpiration = m.expiration || 0; 
-        
+        const ephemeralExpiration = m.expiration || 0;
+
         let mentions = options.mentions || [];
         if (typeof content === 'string' || content.text || content.caption) {
             const textToMatch = content.text || content.caption || content;
@@ -262,7 +262,7 @@ module.exports = (hydro, m, chatUpdate, store) => {
                 if (/^https?:\/\//.test(content)) {
                     const data = await axios.get(content, { responseType: 'arraybuffer' });
                     const mime = data.headers['content-type'] || (await FileType.fromBuffer(data.data))?.mime;
-                    
+
                     if (mime && /gif|image|video|audio|pdf|stream/i.test(mime)) {
                         return await hydro.sendFileUrl(chat, content, caption, quoted, options);
                     } else {
@@ -277,7 +277,7 @@ module.exports = (hydro, m, chatUpdate, store) => {
         }
     };
 
-    return { 
+    return {
         reply,
         replytolak,
         replyquery,

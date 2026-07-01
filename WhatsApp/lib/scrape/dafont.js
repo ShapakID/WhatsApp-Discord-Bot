@@ -1,5 +1,6 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
+let cheerio ;
+try { cheerio  = require('cheerio'); } catch(e) {}
 
 async function searchDafont(q) {
     let url = 'https://www.dafont.com/search.php?q=' + encodeURIComponent(q);

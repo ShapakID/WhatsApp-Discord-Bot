@@ -18,36 +18,36 @@ const initDatabase = (m, isChannel) => {
             global.dbRole[m.chat] = { list: [], members: {} };
             try {
                 fs.writeFileSync('./database/roles.json', JSON.stringify(global.dbRole, null, 2));
-            } catch(e) {}
+            } catch (e) { }
         }
     }
-    
-    if (!global.db.settings) global.db.settings = {}; 
+
+    if (!global.db.settings) global.db.settings = {};
 
     if (!global.db.settings.lastResetLimit || global.db.settings.lastResetLimit !== today) {
         for (let jid in global.db.users) {
             let user = global.db.users[jid];
             if (typeof user === 'object') {
-                user.limitfree = 15; 
-                
+                user.limitfree = 15;
+
                 let isPrem = user.premium || (global.premium && global.premium.includes(jid.split('@')[0]));
                 if (isPrem) {
-                    user.limitprem = 500; 
+                    user.limitprem = 500;
                 } else {
-                    user.limitprem = 0;   
+                    user.limitprem = 0;
                 }
             }
         }
         global.db.settings.lastResetLimit = today;
-        try { fs.writeFileSync('./database/database.json', JSON.stringify(global.db, null, 2)); } catch(e){}
+        try { fs.writeFileSync('./database/database.json', JSON.stringify(global.db, null, 2)); } catch (e) { }
     }
 
     if (m.sender && !isChannel) {
         let user = global.db.users[m.sender]
-        
+
         if (typeof user !== 'object') global.db.users[m.sender] = {}
         user = global.db.users[m.sender]
-        
+
         let isPrem = user.premium || (global.premium && global.premium.includes(m.sender.split('@')[0]));
 
         if (user) {
@@ -60,7 +60,7 @@ const initDatabase = (m, isChannel) => {
             if (!isNumber(user.limitfree)) user.limitfree = 15
             if (!isNumber(user.limitprem)) user.limitprem = isPrem ? 500 : 0
             if (!isNumber(user.limitbuy)) user.limitbuy = 0
-            
+
             if (!isNumber(user.lastmining)) user.lastmining = 0
             if (!isNumber(user.lastdungeon)) user.lastdungeon = 0
             if (!user.name) user.name = m.pushName || 'Unknown'
@@ -90,11 +90,11 @@ const getLimitCost = (command, defaultCost) => {
 }
 
 const checkLimit = (sender, isOwner) => {
-    if (isOwner) return "∞"; 
-    
+    if (isOwner) return "∞";
+
     let user = global.db.users[sender];
     if (!user) return 0;
-    
+
     let free = isNumber(user.limitfree) ? user.limitfree : 0;
     let prem = isNumber(user.limitprem) ? user.limitprem : 0;
     let buy = isNumber(user.limitbuy) ? user.limitbuy : 0;
@@ -102,13 +102,13 @@ const checkLimit = (sender, isOwner) => {
 }
 
 const useLimit = (sender, amount, isOwner) => {
-    if (isOwner || amount <= 0) return true; 
-    
+    if (isOwner || amount <= 0) return true;
+
     let user = global.db.users[sender];
     if (!user) return false;
 
-    let totalLimit = checkLimit(sender, false); 
-    if (totalLimit < amount) return false; 
+    let totalLimit = checkLimit(sender, false);
+    if (totalLimit < amount) return false;
 
     let needed = amount;
     if (user.limitfree >= needed) {
@@ -116,7 +116,7 @@ const useLimit = (sender, amount, isOwner) => {
     } else {
         needed -= user.limitfree;
         user.limitfree = 0;
-        
+
         if (user.limitprem >= needed) {
             user.limitprem -= needed;
         } else {
@@ -202,7 +202,7 @@ const cmdRegister = async (m, db, args) => {
         }
 
         const name = args[0]
-        const age  = args[1]
+        const age = args[1]
 
         if (!isValidName(name)) {
             return m.reply(
@@ -233,7 +233,7 @@ const cmdRegister = async (m, db, args) => {
 
         try {
             fs.writeFileSync('./database/database.json', JSON.stringify(db, null, 2))
-        } catch (e) {}
+        } catch (e) { }
 
         return m.reply(
             `✅ *Daftar Berhasil!*\n\n` +
@@ -288,7 +288,7 @@ const cmdSetName = async (m, db, args) => {
 
         try {
             fs.writeFileSync('./database/database.json', JSON.stringify(db, null, 2))
-        } catch (e) {}
+        } catch (e) { }
 
         return m.reply(
             `✅ *Nama Berhasil Diubah!*\n\n` +
@@ -333,7 +333,7 @@ const cmdUnregister = async (m, db) => {
 
         try {
             fs.writeFileSync('./database/database.json', JSON.stringify(db, null, 2))
-        } catch (e) {}
+        } catch (e) { }
 
         return m.reply(
             `✅ *Undaftar Berhasil!*\n\n` +
@@ -423,14 +423,14 @@ const cmdSetDaftarMode = async (m, db, args, isOwner) => {
 
         try {
             fs.writeFileSync('./database/database.json', JSON.stringify(global.db, null, 2))
-        } catch (e) {}
+        } catch (e) { }
 
         const newStatus = global.db.settings.registrationRequired ? '✅ ON' : '❌ OFF'
         return m.reply(
             `✅ *Registration Mode Berhasil Diubah!*\n\n` +
             `Status: ${newStatus}\n\n` +
-            `${global.db.settings.registrationRequired 
-                ? '🔒 Fitur game memerlukan registrasi' 
+            `${global.db.settings.registrationRequired
+                ? '🔒 Fitur game memerlukan registrasi'
                 : '🔓 Fitur game terbuka untuk semua'}`
         )
 
@@ -440,10 +440,10 @@ const cmdSetDaftarMode = async (m, db, args, isOwner) => {
     }
 }
 
-module.exports = { 
-    initDatabase, 
-    getLimitCost, 
-    checkLimit, 
+module.exports = {
+    initDatabase,
+    getLimitCost,
+    checkLimit,
     useLimit,
     // Registration functions
     generateRegId,

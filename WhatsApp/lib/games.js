@@ -1,6 +1,7 @@
 const fs = require('fs');
 const axios = require('axios');
-const { Chess } = require('chess.js');
+let Chess;
+try { Chess = require('chess.js').Chess; } catch (e) { Chess = class {}; }
 const { addExp, expToNextLevel, roleFromLevel } = require('./rpg');
 
 global.tebaklagu = global.tebaklagu ? global.tebaklagu : {};

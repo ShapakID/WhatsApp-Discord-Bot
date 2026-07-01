@@ -4,7 +4,17 @@
     *  https://whatsapp.com/channel/0029VbAYRBf4o7qSa74h2m0t
    ------------------------------------------------*/
 
-const { createCanvas, registerFont, loadImage } = require('canvas');
+let createCanvas, registerFont, loadImage;
+try {
+    const canvasLib = require('canvas');
+    createCanvas = canvasLib.createCanvas;
+    registerFont = canvasLib.registerFont;
+    loadImage = canvasLib.loadImage;
+} catch (e) {
+    createCanvas = () => { throw new Error('Fitur ini butuh modul canvas, tapi gagal diload karena STB penuh/gak support.'); };
+    registerFont = () => { };
+    loadImage = () => { throw new Error('Fitur ini butuh modul canvas, tapi gagal diload karena STB penuh/gak support.'); };
+}
 const { exec } = require('child_process');
 const fs = require('fs');
 const path = require('path');

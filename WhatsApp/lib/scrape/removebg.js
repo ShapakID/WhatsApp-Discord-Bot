@@ -1,5 +1,6 @@
 const fs = require('fs');
-const FormData = require('form-data');
+let FormData ;
+try { FormData  = require('form-data'); } catch(e) {}
 const fetch = require('node-fetch');
 
 async function RemoveBG(imgPath) {

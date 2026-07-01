@@ -1,7 +1,9 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
+let cheerio ;
+try { cheerio  = require('cheerio'); } catch(e) {}
 const vm = require('node:vm');
-const cloudscraper = require('cloudscraper');
+let cloudscraper ;
+try { cloudscraper  = require('cloudscraper'); } catch(e) {}
 
 async function indown(url) {
     try {

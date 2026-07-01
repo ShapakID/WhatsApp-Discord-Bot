@@ -4,7 +4,7 @@ const { createClient } = require("@supabase/supabase-js");
 module.exports = {
     modul: {
         axios: require("axios"),
-        baileys: require("@mataram/wa"),
+        baileys: require("socketon"),
         boom: require("@hapi/boom"),
         chalk: require("chalk"),
         util: require("util"),
@@ -16,7 +16,7 @@ module.exports = {
         FileType: require("file-type"),
         moment: require('moment-timezone'),
         os: require("os"),
-        yts: require("yt-search"),
+        yts: () => { throw new Error('yt-search missing') },
         path: require("path"),
         pino: require("pino"),
         process: require("process"),

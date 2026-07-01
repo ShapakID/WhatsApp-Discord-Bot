@@ -24,7 +24,7 @@ const {
     proto,
     USyncQuery,
     USyncUser
-} = require('@mataram/wa')
+} = require('socketon')
 const crypto = require('crypto')
 const cfonts = require('cfonts');
 const { exec } = require('child_process');

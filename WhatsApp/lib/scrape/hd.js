@@ -1,6 +1,8 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
-const FormData = require('form-data');
+let cheerio ;
+try { cheerio  = require('cheerio'); } catch(e) {}
+let FormData ;
+try { FormData  = require('form-data'); } catch(e) {}
 const crypto = require('crypto');
 
 async function getToken() {
