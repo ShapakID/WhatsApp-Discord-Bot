@@ -183,6 +183,7 @@ async function hydroInd() {
     }
 
     await fsm(version, chalk, hydro);
+    loadCommands(hydro);
 
     if (!hydro.authState.creds.registered) {
         const inputNumber = await question('Masukin nomor yang mau dijadikan bot.. contoh: 6285187063723\n');
