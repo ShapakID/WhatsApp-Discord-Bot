@@ -143,7 +143,7 @@ async function hydroInd() {
             creds: state.creds,
             keys: makeCacheableSignalKeyStore(state.keys, Pino({ level: "fatal" }).child({ level: "fatal" })),
         },
-        browser: ["Ubuntu", "Chrome", "20.0.04"],
+        browser: baileys.Browsers.mataram('Desktop'),
         cachedGroupMetadata: async (jid) => {
             if (!jid.endsWith('@g.us')) return
             let gm = store.groupMetadata?.[jid]
@@ -186,7 +186,9 @@ async function hydroInd() {
 
     if (!hydro.authState.creds.registered) {
         const inputNumber = await question('Masukin nomor yang mau dijadikan bot.. contoh: 6285187063723\n');
-        let code = await hydro.requestPairingCode(inputNumber || phoneNumber);
+        console.log("Menunggu 3 detik agar koneksi stabil sebelum meminta kode...");
+        await delay(3000);
+        let code = await hydro.requestPairingCode((inputNumber || phoneNumber).replace(/[^0-9]/g, ''));
         code = code?.match(/.{1,4}/g)?.join("-") || code;
         console.log(`Ini kodenya:`, code);
     }
