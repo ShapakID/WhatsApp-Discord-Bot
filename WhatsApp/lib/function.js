@@ -248,70 +248,36 @@ function tarBackup(source, output) {
 async function listbut2(hydro, m, teks, listnye) {
     let isVideo = false;
     let thumbPath = global.thumbnail || 'https://telegra.ph/file/default.jpg';
+    if (thumbPath.match(/\.(mp4|gif)$/i)) isVideo = true;
 
-    if (thumbPath.match(/\.(mp4|gif)$/i)) {
-        isVideo = true;
+    let fallbackText = teks + '\n\n';
+    
+    if (listnye && listnye.sections) {
+        listnye.sections.forEach(section => {
+            fallbackText += `╭───『 *${section.title.toUpperCase()}* 』───\n`;
+            section.rows.forEach(row => {
+                fallbackText += `│ • ${row.title}\n`;
+                if (row.description) fallbackText += `│   └ ${row.description}\n`;
+                fallbackText += `│   └ Ketik: *${row.id}*\n`;
+            });
+            fallbackText += `╰────────────────────\n\n`;
+        });
+    } else {
+        fallbackText += "\n(Menu tidak tersedia dalam mode teks)";
     }
+    
+    fallbackText += `*By ${global.ownername}*`;
 
-    let mediaObj;
     try {
-        if (thumbPath.startsWith('http')) {
-            mediaObj = isVideo ? { video: { url: thumbPath }, gifPlayback: true } : { image: { url: thumbPath } };
+        if (isVideo) {
+            await hydro.sendMessage(m.chat, { video: fs.existsSync(thumbPath) ? fs.readFileSync(thumbPath) : { url: thumbPath }, caption: fallbackText, gifPlayback: true }, { quoted: m });
         } else {
-            let fileBuffer = fs.readFileSync(thumbPath);
-            mediaObj = isVideo ? { video: fileBuffer, gifPlayback: true } : { image: fileBuffer };
+            await hydro.sendMessage(m.chat, { image: fs.existsSync(thumbPath) ? fs.readFileSync(thumbPath) : { url: thumbPath }, caption: fallbackText }, { quoted: m });
         }
     } catch (e) {
-        let fallbackUrl = isVideo ? 'https://raw.githubusercontent.com/AhmadAkbarID/media/refs/heads/main/menuvid.mp4' : 'https://telegra.ph/file/default.jpg';
-        mediaObj = isVideo ? { video: { url: fallbackUrl }, gifPlayback: true } : { image: { url: fallbackUrl } };
+        // Fallback to pure text if media fails
+        await hydro.sendMessage(m.chat, { text: fallbackText }, { quoted: m });
     }
-
-    let msg = generateWAMessageFromContent(m.chat, {
-        viewOnceMessage: {
-            message: {
-                "messageContextInfo": {
-                    "deviceListMetadata": {},
-                    "deviceListMetadataVersion": 2
-                },
-                interactiveMessage: proto.Message.InteractiveMessage.create({
-                    contextInfo: {
-                        mentionedJid: [m.sender],
-                        forwardingScore: 99,
-                        isForwarded: true,
-                        forwardedNewsletterMessageInfo: {
-                            newsletterJid: global.channel || '',
-                            newsletterName: global.channeln || '',
-                            serverMessageId: 1
-                        }
-                    },
-                    body: proto.Message.InteractiveMessage.Body.create({
-                        text: teks
-                    }),
-                    footer: proto.Message.InteractiveMessage.Footer.create({
-                        text: `By ${global.ownername}`
-                    }),
-                    header: proto.Message.InteractiveMessage.Header.create({
-                        title: ``,
-                        hasMediaAttachment: true,
-                        ...(await prepareWAMessageMedia(
-                            mediaObj,
-                            { upload: hydro.waUploadToServer }
-                        )),
-                    }),
-                    nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-                        buttons: [{
-                            "name": "single_select",
-                            "buttonParamsJson": JSON.stringify(listnye)
-                        }],
-                    }),
-                })
-            }
-        }
-    }, { quoted: m });
-
-    await hydro.relayMessage(msg.key.remoteJid, msg.message, {
-        messageId: msg.key.id
-    });
 }
 
 const getMenuList = (prefix) => {
