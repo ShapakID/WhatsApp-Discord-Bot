@@ -156,22 +156,22 @@ const {
 
 // ====== MODULE END & SCRAPE START ======
 
-const RemoveBG = () => {};
-const tiktokDl = () => {};
-const igdl = () => {};
-const mathgpt = () => {};
-const FeloClient = class {};
-const chatex = () => {};
-const ReactChannel = () => {};
-const searchPinterestAPI = () => {};
-const searchDafont = () => {};
-const searchSpotify = () => {};
-const ytmp3 = () => {};
-const ytmp4 = () => {};
-const spotifyScrape = () => {};
-const hdvideo = () => {};
-const hdr = () => {};
-const capcutDownload = () => {};
+const RemoveBG = () => { };
+const tiktokDl = () => { };
+const igdl = () => { };
+const mathgpt = () => { };
+const FeloClient = class { };
+const chatex = () => { };
+const ReactChannel = () => { };
+const searchPinterestAPI = () => { };
+const searchDafont = () => { };
+const searchSpotify = () => { };
+const ytmp3 = () => { };
+const ytmp4 = () => { };
+const spotifyScrape = () => { };
+const hdvideo = () => { };
+const hdr = () => { };
+const capcutDownload = () => { };
 
 // ====== SCRAPE END & REQUIRE AREA ======
 

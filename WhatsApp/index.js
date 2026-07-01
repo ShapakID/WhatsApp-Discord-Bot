@@ -11,7 +11,7 @@ const {
     AnyMessageContent,
     useMultiFileAuthState,
     delay,
-    fetchLatestVersion,
+    fetchLatestBaileysVersion,
     generateForwardMessageContent,
     prepareWAMessageMedia,
     generateWAMessageFromContent,
@@ -131,7 +131,7 @@ const normalizeMessageIds = async (sock, kay) => {
 
 async function hydroInd() {
     await delay(5000)
-    const { version } = await fetchLatestVersion()
+    const { version } = await fetchLatestBaileysVersion()
     const { saveCreds, state } = await useMultiFileAuthState(global.sessionName)
 
     const hydro = makeWASocket({
