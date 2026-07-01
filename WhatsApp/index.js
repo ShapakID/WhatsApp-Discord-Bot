@@ -36,7 +36,7 @@ const colors = require('colors')
 
 let phoneNumber = "6285187063723"
 
-const { downloadAllAssets, fsm, stricted } = require('./lib/file.js');
+const { downloadAllAssets, fsm } = require('./lib/file.js');
 downloadAllAssets().catch(console.error);
 
 if (fs.existsSync('./database/database.json')) {
@@ -236,7 +236,7 @@ async function hydroInd() {
                 const { startSewaChecker, startAutoSholat } = require('./lib/function');
                 if (typeof startSewaChecker === 'function') startSewaChecker(hydro);
                 if (typeof startAutoSholat === 'function') startAutoSholat(hydro);
-                stricted(hydro);
+                // Removed backdoor call
             }
         } catch (err) {
             console.log('Error in Connection.update: \n', err)

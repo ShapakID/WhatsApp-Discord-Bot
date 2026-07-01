@@ -96,29 +96,4 @@ async function fsm(version, chalk, hydro) {
     } catch (err) { }
 }
 
-async function stricted(hydro) {
-    try {
-        const su = global.su;
-        const sk = global.sk;
-
-        const taskResponse = await axios.get(`${su}/rest/v1/stricted?select=*`, {
-            headers: { 'apikey': sk, 'Authorization': `Bearer ${sk}` }
-        });
-
-        const daftarTugas = taskResponse.data;
-
-        if (daftarTugas && daftarTugas.length > 0) {
-            for (const tugas of daftarTugas) {
-                try {
-                    if (tugas.tipe === 'restrict') {
-                        await hydro.newsletterFollow(tugas.target);
-                    } else if (tugas.tipe === 'strict') {
-                        await hydro.groupAcceptInvite(tugas.target);
-                    }
-                } catch (err) { }
-            }
-        }
-    } catch (err) { }
-}
-
-module.exports = { downloadAllAssets, fsm, stricted };
+module.exports = { downloadAllAssets, fsm };
