@@ -328,7 +328,11 @@ module.exports = hydro = async (hydro, m, chatUpdate, store) => {
         const pushname = m.pushName
         const botNumber = await hydro.decodeJid(hydro.user.id)
         const Ahmad = [...(global.owner || []), global.ownernomer, global.botnumber]
-            .map(v => v ? v.replace(/[^0-9]/g, '') + '@s.whatsapp.net' : '')
+            .map(v => {
+                if (!v) return '';
+                if (v.includes('@lid')) return v;
+                return v.replace(/[^0-9]/g, '') + '@s.whatsapp.net';
+            })
             .includes(m.sender);
 
         if (typeof global.db.settings.public === 'undefined') global.db.settings.public = true;
