@@ -307,7 +307,7 @@ async function hydroInd() {
 
             const m = kay
             if (global.autoread && m.key && !m.key.fromMe) {
-                hydro.readMessages([m.key]).catch(() => { });
+                await hydro.readMessages([m.key]);
             }
             require('./hydro')(hydro, m, chatUpdate, store)
         } catch (err) {
