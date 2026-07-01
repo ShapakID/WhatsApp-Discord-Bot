@@ -251,7 +251,7 @@ async function listbut2(hydro, m, teks, listnye) {
     if (thumbPath.match(/\.(mp4|gif)$/i)) isVideo = true;
 
     let fallbackText = teks + '\n\n';
-    
+
     if (listnye && listnye.sections) {
         listnye.sections.forEach(section => {
             fallbackText += `╭───『 *${section.title.toUpperCase()}* 』───\n`;
@@ -265,7 +265,7 @@ async function listbut2(hydro, m, teks, listnye) {
     } else {
         fallbackText += "\n(Menu tidak tersedia dalam mode teks)";
     }
-    
+
     fallbackText += `*By ${global.ownername}*`;
 
     try {
