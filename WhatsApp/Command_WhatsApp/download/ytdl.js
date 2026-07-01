@@ -8,48 +8,39 @@ module.exports = {
         const url = args[1];
         if (!type || !url) return;
 
-        hydro.sendMessage(m.chat, { text: `_Sedang memproses ${type.toUpperCase()} via Botcahx..._` });
+        hydro.sendMessage(m.chat, { text: `_Sedang memproses ${type.toUpperCase()} via Ryzendesu API..._` });
 
         try {
-            let apiKey = global.btc;
-            // Fix pakai URL yang persis sama kayak yang kamu temuin
-            let apiUrl = `https://api.botcahx.eu.org/api/dowloader/yt?url=${encodeURIComponent(url)}&apikey=${apiKey}`;
+            let apiUrl = type === 'mp3' 
+                ? `https://api.ryzendesu.vip/api/downloader/ytmp3?url=${encodeURIComponent(url)}`
+                : `https://api.ryzendesu.vip/api/downloader/ytmp4?url=${encodeURIComponent(url)}`;
 
-            let res = await axios.get(apiUrl);
-            if (!res.data || !res.data.status) throw new Error(`Gagal memproses link dari Botcahx.`);
+            let res = await axios.get(apiUrl, {
+                headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
+            });
 
-            let result = res.data.result;
+            if (!res.data || !res.data.url) throw new Error(`Gagal mengambil data dari Ryzendesu API.`);
 
-            // Tangkap link MP3 atau MP4 dari result
-            let finalUrl = '';
-            if (type === 'mp3') {
-                finalUrl = result.mp3 || result.audio || (result.url && result.url.mp3);
-            } else {
-                finalUrl = result.mp4 || result.video || (result.url && result.url.mp4);
-            }
+            let finalUrl = res.data.url;
+            let title = res.data.title || res.data.title_audio || 'YouTube Video';
+            let thumb = res.data.thumb || '';
 
-            // Jaga-jaga kalau ternyata cuma ngasih satu string langsung atau array
-            if (!finalUrl && typeof result === 'string') finalUrl = result;
-            if (Array.isArray(finalUrl)) finalUrl = finalUrl[0];
+            if (!finalUrl) throw new Error("Link file tidak ditemukan dalam respon API.");
 
-            if (!finalUrl) {
-                console.log("Isi Respon API:", result); // Biar gampang nge-track di terminal kalau gagal
-                throw new Error("Link file tidak ditemukan dalam respon API.");
-            }
-
-            let cap = `*YouTube Downloader*\n\n◦ *Judul:* ${result.title || 'YouTube Video'}\n\n_Downloaded by ${global.botname}_`;
+            let cap = `*YouTube Downloader*\n\n◦ *Judul:* ${title}\n\n_Downloaded by ${global.botname}_`;
 
             if (type === 'mp3') {
                 await hydro.sendMessage(m.chat, {
                     audio: { url: finalUrl },
                     mimetype: 'audio/mpeg',
-                    fileName: `${result.title || 'audio'}.mp3`
+                    fileName: `${title}.mp3`
                 }, { quoted: m });
             } else {
                 await hydro.sendMessage(m.chat, { video: { url: finalUrl }, caption: cap }, { quoted: m });
             }
         } catch (err) {
-            let errMsg = err.response?.status === 404 ? "API Endpoint tidak ditemukan (404)" : (err.response?.data?.message || err.message);
+            let errMsg = err.message;
+            if (err.response) errMsg = `Server Error: ${err.response.status}`;
             hydro.sendMessage(m.chat, { text: `Error: ${errMsg}` }, { quoted: m });
         }
     }
