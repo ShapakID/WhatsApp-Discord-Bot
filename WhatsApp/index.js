@@ -11,7 +11,7 @@ const {
     AnyMessageContent,
     useMultiFileAuthState,
     delay,
-    fetchLatestBaileysVersion,
+    fetchLatestVersion,
     generateForwardMessageContent,
     prepareWAMessageMedia,
     generateWAMessageFromContent,
@@ -24,7 +24,7 @@ const {
     proto,
     USyncQuery,
     USyncUser
-} = require('socketon')
+} = require('@mataram/wa')
 const crypto = require('crypto')
 const cfonts = require('cfonts');
 const { exec } = require('child_process');
@@ -131,7 +131,7 @@ const normalizeMessageIds = async (sock, kay) => {
 
 async function hydroInd() {
     await delay(5000)
-    const { version } = await fetchLatestBaileysVersion()
+    const { version } = await fetchLatestVersion()
     const { saveCreds, state } = await useMultiFileAuthState(global.sessionName)
 
     const hydro = makeWASocket({

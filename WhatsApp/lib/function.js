@@ -7,7 +7,7 @@ const chalk = require('chalk');
 const fetch = require('node-fetch');
 const { sizeFormatter } = require('human-readable');
 const { exec, spawn, execSync } = require('child_process');
-const { proto, generateWAMessageFromContent, prepareWAMessageMedia, downloadContentFromMessage } = require('socketon')
+const { proto, generateWAMessageFromContent, prepareWAMessageMedia, downloadContentFromMessage } = require('@mataram/wa')
 const pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.split('');
 const { createClient } = require('@supabase/supabase-js');
 const WebSocket = require('ws');
@@ -358,7 +358,7 @@ const getMenuList = (prefix) => {
 
 async function groupStatus(hydro, jid, content) {
     const crypto = require('crypto');
-    const { generateWAMessageContent, generateWAMessageFromContent } = require('socketon');
+    const { generateWAMessageContent, generateWAMessageFromContent } = require('@mataram/wa');
 
     const { backgroundColor } = content;
     delete content.backgroundColor;
