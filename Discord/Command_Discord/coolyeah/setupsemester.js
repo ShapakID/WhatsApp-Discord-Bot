@@ -4,7 +4,7 @@ try {
     const driveMod = require('../../../lib/drive');
     getDriveClient = driveMod.getDriveClient;
     getOrCreateFolder = driveMod.getOrCreateFolder;
-} catch (e) {}
+} catch (e) { }
 
 module.exports = {
     name: 'setupsemester',

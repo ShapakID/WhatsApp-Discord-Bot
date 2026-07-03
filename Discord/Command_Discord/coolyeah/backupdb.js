@@ -3,7 +3,7 @@ const path = require('path');
 let uploadToDrive;
 try {
     uploadToDrive = require('../../../lib/drive').uploadToDrive;
-} catch (e) {}
+} catch (e) { }
 
 module.exports = {
     name: 'backupdb',

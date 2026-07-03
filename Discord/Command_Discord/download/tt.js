@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBu
 let tiktokDl;
 try {
     tiktokDl = require('../../../lib/scrape/tiktok').tiktokDl;
-} catch (e) {}
+} catch (e) { }
 const axios = require('axios');
 
 module.exports = {

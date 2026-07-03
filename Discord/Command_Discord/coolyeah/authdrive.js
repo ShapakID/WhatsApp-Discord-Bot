@@ -2,7 +2,7 @@ const fs = require('fs');
 let google;
 try {
     google = require('googleapis').google;
-} catch (e) {}
+} catch (e) { }
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 const TOKEN_PATH = 'token.json';

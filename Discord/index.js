@@ -4,6 +4,20 @@ require('../settings');
 const fs = require('fs');
 const { Client, GatewayIntentBits, Collection, ActivityType } = require('discord.js');
 const { Shoukaku, Connectors } = require('shoukaku');
+const path = require('path');
+
+if (!global.db) {
+    const dbPath = path.resolve(__dirname, '../database/database.json');
+    if (fs.existsSync(dbPath)) {
+        try {
+            global.db = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+        } catch (e) {
+            global.db = { users: {}, groups: {}, chats: {}, database: {}, settings: {}, others: {} };
+        }
+    } else {
+        global.db = { users: {}, groups: {}, chats: {}, database: {}, settings: {}, others: {} };
+    }
+}
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMembers],
@@ -47,7 +61,7 @@ shoukaku.on('disconnect', (name, players, moved) => {
 
 client.shoukaku = shoukaku;
 
-const path = require('path');
+
 client.commands = new Collection();
 const cmdPath = fs.existsSync(path.resolve(__dirname, './Command_Discord')) ? './Command_Discord' : './commanddiscord';
 

@@ -2,7 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBu
 let ytdl;
 try {
     ytdl = require('@distube/ytdl-core');
-} catch (e) {}
+} catch (e) { }
 
 module.exports = {
     name: 'yt',
