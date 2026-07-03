@@ -1,5 +1,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require('discord.js');
-const ytdl = require('@distube/ytdl-core');
+let ytdl;
+try {
+    ytdl = require('@distube/ytdl-core');
+} catch (e) {}
 
 module.exports = {
     name: 'yt',
@@ -10,6 +13,8 @@ module.exports = {
         if (!args[0]) {
             return message.reply("Kirim link YouTube!\nContoh: `.yt https://youtu.be/...`");
         }
+
+        if (!ytdl) return message.reply("❌ Fitur download YouTube Discord dinonaktifkan (hemat RAM STB). Gunakan bot WhatsApp untuk fitur ini!");
 
         const url = args[0];
         if (!url.includes('youtube.com') && !url.includes('youtu.be')) {

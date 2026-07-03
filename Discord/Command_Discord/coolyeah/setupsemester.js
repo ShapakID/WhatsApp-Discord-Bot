@@ -1,5 +1,10 @@
 const fs = require('fs');
-const { getDriveClient, getOrCreateFolder } = require('../../../lib/drive');
+let getDriveClient, getOrCreateFolder;
+try {
+    const driveMod = require('../../../lib/drive');
+    getDriveClient = driveMod.getDriveClient;
+    getOrCreateFolder = driveMod.getOrCreateFolder;
+} catch (e) {}
 
 module.exports = {
     name: 'setupsemester',
@@ -12,6 +17,8 @@ module.exports = {
         if (!global.driveFolderId) return message.reply(`global.driveFolderId belum diisi di settings.js!`);
 
         const sent = await message.reply(`Mengecek & Sinkronisasi folder Semester ${semester} di Google Drive...\nSabar ya, proses ini ngecek folder satu-satu biar nggak duplikat.`);
+
+        if (!getDriveClient) return sent.edit("❌ Fitur setup semester dinonaktifkan (modul dihapus untuk menghemat memori STB).");
 
         try {
             const drive = await getDriveClient();

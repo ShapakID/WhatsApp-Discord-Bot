@@ -21,7 +21,7 @@ module.exports = {
 
             let result = res.data.data;
             let videoUrl = result.play || result.wmplay;
-            
+
             // TikWM API sometimes returns relative URLs like /video/media/play/...
             if (videoUrl && !videoUrl.startsWith('http')) {
                 videoUrl = 'https://www.tikwm.com' + videoUrl;

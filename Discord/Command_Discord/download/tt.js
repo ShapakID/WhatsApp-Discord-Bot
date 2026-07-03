@@ -1,5 +1,8 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, AttachmentBuilder } = require('discord.js');
-const { tiktokDl } = require('../../../lib/scrape/tiktok');
+let tiktokDl;
+try {
+    tiktokDl = require('../../../lib/scrape/tiktok').tiktokDl;
+} catch (e) {}
 const axios = require('axios');
 
 module.exports = {
@@ -11,6 +14,8 @@ module.exports = {
         if (!args[0]) {
             return message.reply("Kirim link TikTok!\nContoh: `.tt https://vt.tiktok.com/...`");
         }
+
+        if (!tiktokDl) return message.reply("❌ Fitur download TikTok Discord dinonaktifkan (hemat RAM STB). Gunakan bot WhatsApp untuk fitur ini!");
 
         const url = args[0];
         if (!url.includes('tiktok.com')) {

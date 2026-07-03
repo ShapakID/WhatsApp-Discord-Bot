@@ -1,5 +1,8 @@
 const fs = require('fs');
-const { google } = require('googleapis');
+let google;
+try {
+    google = require('googleapis').google;
+} catch (e) {}
 
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 const TOKEN_PATH = 'token.json';
@@ -10,6 +13,8 @@ module.exports = {
     async execute(message, args) {
         const isOwner = message.author.id === '1202397666835701830';
         if (!isOwner) return; // silent
+
+        if (!google) return message.reply("Fitur ini dinonaktifkan karena modul googleapis tidak tersedia (hemat storage).");
 
         if (!fs.existsSync(CREDENTIALS_PATH)) {
             return message.reply("❌ File credentials.json tidak ditemukan! Gagal melakukan autentikasi.");

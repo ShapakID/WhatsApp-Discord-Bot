@@ -1,6 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const { uploadToDrive } = require('../../../lib/drive');
+let uploadToDrive;
+try {
+    uploadToDrive = require('../../../lib/drive').uploadToDrive;
+} catch (e) {}
 
 module.exports = {
     name: 'backupdb',
@@ -9,6 +12,8 @@ module.exports = {
         if (!isOwner) return;
 
         const sent = await message.reply("Sedang memproses backup database...");
+
+        if (!uploadToDrive) return sent.edit("❌ Fitur backup DB dinonaktifkan (modul dihapus untuk menghemat memori STB).");
 
         try {
             const dbPath = path.resolve('./Data/database.json');
