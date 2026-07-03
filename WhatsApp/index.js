@@ -1,4 +1,14 @@
 require('./settings');
+const originalConsoleLog = console.log;
+console.log = function(...args) {
+    if (typeof args[0] === 'string' && args[0].includes('Closing session:')) return;
+    originalConsoleLog.apply(console, args);
+};
+const originalConsoleInfo = console.info;
+console.info = function(...args) {
+    if (typeof args[0] === 'string' && args[0].includes('Closing session:')) return;
+    originalConsoleInfo.apply(console, args);
+};
 const { loadCommands } = require('./lib/handler');
 const { modul } = require('./lib/module');
 const moment = require('moment-timezone');
