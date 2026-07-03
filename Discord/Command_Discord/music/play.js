@@ -14,7 +14,7 @@ module.exports = {
         if (!shoukaku) return message.reply('Sistem Lavalink belum siap!');
 
         const node = shoukaku.options.nodeResolver(shoukaku.nodes);
-        if (!node) return message.reply('Waduh, server Lavalink gratisannya lagi pada mati/down nih. Coba lagi nanti ya!');
+        if (!node) return message.reply('⚠️ Sedang menghubungkan ulang ke server musik (Lavalink Reconnecting). Mohon tunggu beberapa detik lalu coba lagi ya!');
 
         // Bikin sistem antrean (queue) per server
         if (!message.client.musicQueues) message.client.musicQueues = new Map();
